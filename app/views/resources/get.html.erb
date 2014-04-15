@@ -1,5 +1,5 @@
 <h1>HATEAOS Browser</h1>
-<p class="lead">GET <%= @uri %></p>
+<p class="lead">GET <%= @uri %> (<%= link_to "Home", get_project_resource_path(@project) %>)</p>
 
 <% unless @resource.links.empty? %>
   <h2 class="sub-header">Links</h2>

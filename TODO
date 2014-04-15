@@ -1,11 +1,5 @@
-https://api.github.com
-
-forside:
-- input root url
-- vælg bookmark/projects ?
-
-project settings
-- choose authentication
+Authentication
+- choose authentication method
 - basic auth
   - username
   - password
@@ -16,17 +10,16 @@ project settings
   - client_id/client_secret combo
   - default to regular authorizatin_code? probably the "most supported"
 
-hypermedia:
-- look in the document for urls
-- github uses a *_url convention
+Atompub / xml support
+- choose a type for a service or ask server what it supports
 - atompub uses <link rel="" href="">
-- present all links as a TOC
-- parse differences and present humanized as collections/resources
 
-resource view:
-- all non hypermedia is displayed in a table
+Resource view
+- view collections in floater
+- make humanize_collection fields and priority configurable
 - binary data
-- regular data
-- links
+- links should link
 - coordinates
 - dates
+- addresses
+- people?
