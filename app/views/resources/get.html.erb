@@ -1,7 +1,22 @@
-<ul>
-<% @links.each do|name,link| %>
-  <li><%= link_to name, get_project_resource_path(uri: link) %></li>
+<h1>GET <%= @uri %></h1>
+
+<% unless @links.empty? %>
+  <h2>Links</h2>
+  <ul>
+  <% @links.each do|name,link| %>
+    <li><%= link_to name.humanize, get_project_resource_path(uri: link) %></li>
+  <% end %>
+  </ul>
 <% end %>
-</li>
+
+<% unless @resources.empty? %>
+  <h2>Resources</h2>
+  <ul>
+  <% @resources.each do|resource| %>
+    <!-- <li><%= resource.collect {|k,v| k.include? "name" }.first.to_s.humanize %></li> -->
+    <li><%= resource %></li>
+  <% end %>
+  </ul>
+<% end %>
 
 <pre><%= @response.body %></pre>
