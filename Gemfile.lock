@@ -76,6 +76,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.2.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -131,6 +133,7 @@ DEPENDENCIES
   fuubar
   jquery-rails
   rails (= 4.0.2)
+  rest-client
   rspec-rails
   sass-rails (~> 4.0.0)
   sqlite3

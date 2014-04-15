@@ -19,6 +19,8 @@ gem 'jquery-rails'
 # gem 'capistrano', group: :development
 
 # Other
+gem 'rest-client'
+
 group :test do
   gem 'rspec-rails'
   gem 'fuubar'

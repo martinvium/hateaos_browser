@@ -1,0 +1,7 @@
+<ul>
+<% @links.each do|name,link| %>
+  <li><%= link_to name, get_project_resource_path(uri: link) %></li>
+<% end %>
+</li>
+
+<pre><%= @response.body %></pre>
