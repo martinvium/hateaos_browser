@@ -1,4 +1,4 @@
-hateaos_browser
+HATEAOS Browser
 ===============
 
 Explore HATEAOS services in the browser
