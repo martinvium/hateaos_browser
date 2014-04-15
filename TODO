@@ -1,0 +1,32 @@
+https://api.github.com
+
+forside:
+- input root url
+- vælg bookmark/projects ?
+
+project settings
+- choose authentication
+- basic auth
+  - username
+  - password
+- oauth2
+  - authorize url
+  - token url
+  - authorization header token arg (Authorization: Bearer/token/whatever)
+  - client_id/client_secret combo
+  - default to regular authorizatin_code? probably the "most supported"
+
+hypermedia:
+- look in the document for urls
+- github uses a *_url convention
+- atompub uses <link rel="" href="">
+- present all links as a TOC
+- parse differences and present humanized as collections/resources
+
+resource view:
+- all non hypermedia is displayed in a table
+- binary data
+- regular data
+- links
+- coordinates
+- dates
