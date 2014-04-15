@@ -6,10 +6,8 @@ class ResourcesController < ApplicationController
 
   # GET /projects/1/resource/get?uri=
   def get
-    @response = RestClient.get @uri
-    parsed = ActiveSupport::JSON.backend.load(@response.body)
-    @links = parsed.select {|k,v| k.include? "url" }
-    @resources = parsed.select {|k,v| not k.include? "url" }
+    @response = RestClient.get(@uri)
+    @resource = Resource.from_response(@response)
   end
 
   # POST /projects/1/resource/post?uri=
