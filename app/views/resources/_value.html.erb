@@ -1,7 +1,7 @@
 <% if v.respond_to?(:each) %>
   <%= Resource.humanize_collection(v) %>
-<% elsif Resource.link?(v) %>
-  <%= link_to v, get_project_resource_path(uri: v) %>
+<% elsif Resource.url?(v) %>
+  <%= link_to v, get_project_resource_path(url: v) %>
 <% else %>
   <%= v %>
 <% end %>

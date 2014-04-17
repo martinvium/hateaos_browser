@@ -5,6 +5,7 @@ Other
 - regex pattern for url arg substitution
 - make humanize_collection fields and priority configurable
 - limit columns in collection view
+- how can we determine the preferred method of a resource? e.g. a search might be post
 
 Atompub / xml support
 - choose a type for a service or ask server what it supports

@@ -4,14 +4,15 @@ require 'rest_client'
 
 class Project
   @@projects = {}
-  attr_accessor :id, :name, :url, :basic, :oauth2, :errors, :oauth2_access_token
+  attr_accessor :id, :name, :root_url, :basic, :oauth2, :errors, :oauth2_access_token, :url_placeholder_pattern
 
   def initialize(filename, args={})
     self.id = filename[0..-5].to_sym
     self.name = args['name'] || id
-    self.url = args['url']
+    self.root_url = args['root_url']
     self.basic = args['basic'] || {}
     self.oauth2 = args['oauth2'] || {}
+    self.url_placeholder_pattern = args['url_placeholder_pattern']
     self.errors = []
   end
 
@@ -32,12 +33,16 @@ class Project
     all[id.to_sym]
   end
 
+  def url_placeholders?(url)
+    Regexp.new(url_placeholder_pattern).match(url).present?
+  end
+
   def get(url)
     response = authenticated_client.get(url)
 
     case response
     when Net::HTTPSuccess
-      Resource.from_response(response)
+      Resource.from_response(self, response)
     else
       raise "resource get failed: #{response.code} #{response.message}"
     end
@@ -52,14 +57,14 @@ class Project
   end
 
   def authorize_url
-    redirect_uri = Rails.application.routes.url_helpers.auth_callback_url(self, host: 'localhost:3000')
-    uri =  URI.parse(oauth2['authorize_url'])
-    query_params = URI.decode_www_form(uri.query.to_s)
+    redirect_url = Rails.application.routes.url_helpers.auth_callback_url(self, host: 'localhost:3000')
+    url =  url.parse(oauth2['authorize_url'])
+    query_params = url.decode_www_form(url.query.to_s)
     query_params << ["client_id", client_id]
-    query_params << ["redirect_uri", redirect_uri]
+    query_params << ["redirect_url", redirect_url]
     query_params << ["scope", oauth2['scope']]
-    uri.query = URI.encode_www_form(query_params)
-    uri.to_s
+    url.query = url.encode_www_form(query_params)
+    url.to_s
   end
 
   def get_access_token(code)

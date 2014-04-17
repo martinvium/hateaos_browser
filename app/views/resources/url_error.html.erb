@@ -1,0 +1,10 @@
+<h1>URL is invalid</h1>
+<p>It may contain placeholders that require manual interaction:</p>
+
+<%= form_tag get_project_resource_path(@project), method: 'get', html: { role: 'form' } do %>
+  <div class="form-group">
+    <%= url_field_tag :url, @url, class: 'form-control' %>
+  </div>
+
+  <%= submit_tag "Go", class: 'btn btn-default' %>
+<% end %>

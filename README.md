@@ -10,4 +10,4 @@ Explore HATEAOS services in the browser
 
 The example so far is https://api.github.com and the Events collection:
 
-/projects/1/resource/get?uri=https%3A%2F%2Fapi.github.com%2Fevents
+/projects/1/resource/get?url=https%3A%2F%2Fapi.github.com%2Fevents

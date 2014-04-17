@@ -5,7 +5,7 @@ class Resource
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :data
+  attr_accessor :data, :project
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -13,17 +13,17 @@ class Resource
     end
   end
 
-  def self.from_response(response)
+  def self.from_response(project, response)
     data = JSON.load(response.body)
-    Resource.new(data: data)
+    Resource.new(project: project, data: data)
   end
 
-  def self.link?(v)
-    v.to_s.start_with? "http"
+  def self.url?(value)
+    value.to_s.start_with? "http"
   end
 
   def children
-    @children ||= data.map {|r| Resource.new(data: r) }
+    @children ||= data.map {|r| Resource.new(project: project, data: r) }
   end
 
   def collection?
