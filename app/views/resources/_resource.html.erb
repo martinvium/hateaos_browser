@@ -1,0 +1,19 @@
+<% unless @resource.children.empty? %>
+  <h2 class="sub-header">Resources</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @resource.data.each do|k,v| %>
+      <tr>
+        <td><%= k.to_s.humanize %></td>
+        <td><%= render partial: "value", locals: { v: v } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

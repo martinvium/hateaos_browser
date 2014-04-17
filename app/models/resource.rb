@@ -1,3 +1,5 @@
+require 'json'
+
 class Resource
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -12,20 +14,20 @@ class Resource
   end
 
   def self.from_response(response)
-    data = ActiveSupport::JSON.backend.load(response.body)
+    data = JSON.load(response.body)
     Resource.new(data: data)
   end
 
-  def links
-    @links ||= data.select {|k,v| v.to_s.start_with? "http" }
+  def self.link?(v)
+    v.to_s.start_with? "http"
   end
 
   def children
-    @children ||= data.select {|k,v| not k.include? "url" }.map {|r| Resource.new(data: r) }
+    @children ||= data.map {|r| Resource.new(data: r) }
   end
 
-  def viewable_data
-    data
+  def collection?
+    data.is_a? Array
   end
 
   def self.humanize_collection(collection)

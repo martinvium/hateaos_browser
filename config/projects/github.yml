@@ -1,0 +1,9 @@
+name: 'Github'
+url: 'https://api.github.com'
+
+oauth2:
+  client_id: 
+  client_secret: 
+  authorize_url: 'https://github.com/login/oauth/authorize'
+  token_url: 'https://github.com/login/oauth/access_token'
+  scope: 'repo,gist'

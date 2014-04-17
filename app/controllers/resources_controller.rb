@@ -1,13 +1,10 @@
-require 'rest-client'
-
 class ResourcesController < ApplicationController
   before_action :load_project
   before_action :load_uri
 
   # GET /projects/1/resource/get?uri=
   def get
-    @response = RestClient.get(@uri)
-    @resource = Resource.from_response(@response)
+    @resource = @project.get(@uri)
   end
 
   # POST /projects/1/resource/post?uri=
@@ -27,15 +24,15 @@ class ResourcesController < ApplicationController
 
   private
 
+  def client
+    
+  end
+
   def load_uri
     if params[:uri].present?
       @uri = params[:uri]
     else
-      @uri = @project.root
+      @uri = @project.url
     end
-  end
-
-  def load_project
-    @project = Project.find(params[:project_id])
   end
 end

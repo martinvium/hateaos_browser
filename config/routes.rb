@@ -1,14 +1,11 @@
 HateaosBrowser::Application.routes.draw do
-  resources :projects do
-    resource :resource, only: [] do
-      # collection do
-        get 'get'# => "resource#get"
-        # post :post => "resource#get"
-        # put :put => "resource#get"
-        # delete :delete => "resource#get"
-      # end
-    end
-  end
+  get '/projects' => 'projects#index'
+  get '/projects/:project_id' => 'projects#show'
+  get '/projects/:project_id/resource/get' => 'resources#get', as: 'get_project_resource'
 
+  get '/auth/:project_id' => 'sessions#new', as: 'login'
+  get '/auth/:project_id/callback' => 'sessions#create', as: 'auth_callback'
+  get '/logout' => 'sessions#destroy', as: 'logout'
+  
   root "application#home"
 end

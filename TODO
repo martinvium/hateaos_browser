@@ -1,25 +1,17 @@
 Authentication
-- choose authentication method
 - basic auth
-  - username
-  - password
-- oauth2
-  - authorize url
-  - token url
-  - authorization header token arg (Authorization: Bearer/token/whatever)
-  - client_id/client_secret combo
-  - default to regular authorizatin_code? probably the "most supported"
+- secrets.yml
+
+Other
+- regex pattern for url arg substitution
+- make humanize_collection fields and priority configurable
 
 Atompub / xml support
 - choose a type for a service or ask server what it supports
 - atompub uses <link rel="" href="">
 
-Resource view
-- view collections in floater
-- make humanize_collection fields and priority configurable
-- binary data
-- links should link
+Later
 - coordinates
 - dates
 - addresses
-- people?
+- people/mentions
