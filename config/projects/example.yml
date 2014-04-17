@@ -6,8 +6,6 @@ basic:
   password: 
 
 oauth2:
-  client_id:
-  client_secret:
   authorize_url: 'https://example.com/login/oauth/authorize'
   token_url: 'https://example.com/login/oauth/access_token'
   scope:

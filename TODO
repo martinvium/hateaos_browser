@@ -1,10 +1,10 @@
 Authentication
 - basic auth
-- secrets.yml
 
 Other
 - regex pattern for url arg substitution
 - make humanize_collection fields and priority configurable
+- limit columns in collection view
 
 Atompub / xml support
 - choose a type for a service or ask server what it supports

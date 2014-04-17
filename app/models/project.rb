@@ -33,21 +33,29 @@ class Project
   end
 
   def get(url)
-    response = client.get(url)
+    response = authenticated_client.get(url)
 
     case response
     when Net::HTTPSuccess
       Resource.from_response(response)
     else
-      raise "failed to get resource" # todo more info needed
+      raise "resource get failed: #{response.code} #{response.message}"
     end
+  end
+
+  def client_id
+    Rails.application.secrets.send("#{id}_client_id")
+  end
+
+  def client_secret
+    Rails.application.secrets.send("#{id}_client_secret")
   end
 
   def authorize_url
     redirect_uri = Rails.application.routes.url_helpers.auth_callback_url(self, host: 'localhost:3000')
     uri =  URI.parse(oauth2['authorize_url'])
     query_params = URI.decode_www_form(uri.query.to_s)
-    query_params << ["client_id", oauth2['client_id']]
+    query_params << ["client_id", client_id]
     query_params << ["redirect_uri", redirect_uri]
     query_params << ["scope", oauth2['scope']]
     uri.query = URI.encode_www_form(query_params)
@@ -55,12 +63,14 @@ class Project
   end
 
   def get_access_token(code)
-    response = client.post(oauth2['token_url'], {
-      client_id: oauth2['client_id'],
-      client_secret: oauth2['client_secret'],
-      code: code,
-      client_id: oauth2['client_id'],
-    }, { accept: 'application/json' })
+    headers = { accept: 'application/json' }
+    params = {
+      client_id: client_id,
+      client_secret: client_secret,
+      code: code
+    }
+
+    response = client.post(oauth2['token_url'], params, headers)
 
     case response
     when Net::HTTPSuccess
@@ -83,8 +93,8 @@ class Project
       # args[:password] = basic['password']
     end
 
-    if oauth2_access_token
-      @authenticated_client.default_headers['authorization'] = "token #{oauth2_access_token}"
+    if oauth2_access_token.present?
+      @authenticated_client.default_headers['Authorization'] = "token #{oauth2_access_token}"
     end
 
     @authenticated_client
